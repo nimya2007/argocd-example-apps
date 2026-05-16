@@ -18,6 +18,9 @@ spec:
     server: https://kubernetes.default.svc
     namespace: demo-guestbook
 
-  syncPolicy:{}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
     - CreateNamespace=true

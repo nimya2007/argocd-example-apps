@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-app
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: poc-demo
+
+  source:
+    repoURL: https://github.com/nimya2007/argocd-example-apps.git
+    targetRevision: main
+    path: my-apps
+    directory:
+      recurse: true
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
